@@ -1,4 +1,4 @@
-1.環境
+# 1.環境
   frontend
   L Next.js 13
   backend
@@ -7,11 +7,11 @@
   db
   L MySQL8
 
-2.手順
-  2-1 イメージをビルドする
+# 2.手順
+  ## 2-1 イメージをビルドする
   docker compose build
 
-  2-2 フロントエンド 環境構築
+  ## 2-2 フロントエンド 環境構築
     2-2.1 Next.jsのプロジェクトを作成
     docker compose run --rm frontend yarn create next-app .
 
@@ -33,11 +33,11 @@
 
       参考URL:https://zenn.dev/ikkik/articles/51d97ff70bd0da
   
-  2-3 バックエンドの環境構築
+  ## 2-3 バックエンドの環境構築
     2-3.1 Railsのプロジェクトを作成
     docker compose run --rm backend bundle exec rails new . --force --api -d mysql
 
-  2-4 ホストの許可設定
+  ## 2-4 ホストの許可設定
     development.rbに以下の設定を追加します。
     これを追加することでapiホストからのリクエストができるようになります。
     config/environments/development.rb
@@ -47,7 +47,7 @@
         config.hosts << "backend"
       end
 
-  2-5 dbのユーザー名とパスワードを指定
+  ## 2-5 dbのユーザー名とパスワードを指定
   config/database.yml に以下を追加
   default: &default
     adapter: mysql2
@@ -61,13 +61,13 @@
     <<: *default
     database: <%= ENV["MYSQL_DATABASE"] %>
 
-  2-6 コンテナの起動
+  ## 2-6 コンテナの起動
     docker-compose up -d --build
 
-  2-7 データベースの構築
+  ## 2-7 データベースの構築
   docker-compose run --rm backend rails db:create
 
-  2-8 正常にビルドされているか確認
+  ## 2-8 正常にビルドされているか確認
     localhost:8000にアクセスしNext.jsの画面が表示されていれば成功
     localhost:3000にアクセスしRailsの画面が表示されていれば成功
 
